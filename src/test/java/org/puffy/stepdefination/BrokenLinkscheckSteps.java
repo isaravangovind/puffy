@@ -5,7 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import net.thucydides.core.annotations.Steps;
 
-public class LaunchTestSteps {
+public class BrokenLinkscheckSteps {
 
     @Steps
     BrokenLinks brokenlinks;

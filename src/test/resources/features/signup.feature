@@ -3,7 +3,7 @@ Feature: SignUp Validation
   Background:
     Given Launch the app
 
-  Scenario Outline: Footer SignUp Validation
+  Scenario Outline: Footer SignUp check
 
     Then Sign up Text box should display "Enter your email"
     When Enter "<Email>" and Click on Sign up
@@ -12,3 +12,10 @@ Feature: SignUp Validation
     Examples:
       | Email          |
       | valid@test.com |
+
+  Scenario: Header SignUp check
+
+    When Click on sign up
+    Then Navigates to Sign up page
+
+

@@ -33,5 +33,13 @@ public class SignupSteps {
     }
 
 
+    @When("Click on sign up")
+    public void clickOnSignUp() {
+        signup.clickSignUp();
+    }
 
+    @Then("Navigates to Sign up page")
+    public void navigatesToSignUpPage() {
+        signup.checkSignUpNavigation();
+    }
 }

@@ -3,26 +3,31 @@ package com.puffy.pages;
 import com.puffy.base.BasePage;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.serenitybdd.screenplay.actions.Scroll;
-import net.serenitybdd.screenplay.actions.ScrollTo;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.time.Duration;
 import java.util.List;
 
-public class JungleHome extends BasePage {
+public class JungleHomePage extends BasePage {
 
     @FindBy(xpath = "//input[contains(@class, 'subscribe')]")
     WebElementFacade email;
 
     @FindBy(xpath = "//footer//button[contains(text(),'Sign up')]")
-    public WebElement signupBtn;
+    WebElementFacade signupBtn;
 
     @FindBy(xpath = "//div[contains(@class,'state')]")
-    public WebElement signUpstate;
+    WebElementFacade signUpstate;
+
+    @FindBy(xpath = "//span[contains(@class, 'login')]")
+    WebElementFacade signUpHeader;
+
+    @FindBy(linkText = "Explore")
+    WebElementFacade explore;
+
+    @FindBy(linkText = "Market")
+    WebElementFacade market;
+
+    @FindBy(linkText = "How It Works")
+    WebElementFacade howItWorks;
 
 
     public List getAllBrokenLinks() {
@@ -44,5 +49,22 @@ public class JungleHome extends BasePage {
     public String getdefaultText() {
         scrollToview(email);
         return email.getAttribute("placeholder");
+    }
+
+    public void clicksignUp(){
+        clickOn(signUpHeader);
+    }
+
+    public void clickExplore(){
+        clickOn(explore);
+    }
+
+
+    public void clickOnMarket() {
+        clickOn(howItWorks);
+    }
+
+    public void clickOnHowitWorks() {
+        clickOn(howItWorks);
     }
 }
