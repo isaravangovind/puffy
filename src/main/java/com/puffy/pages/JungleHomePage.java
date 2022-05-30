@@ -3,31 +3,88 @@ package com.puffy.pages;
 import com.puffy.base.BasePage;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
 import java.util.List;
 
 public class JungleHomePage extends BasePage {
 
     @FindBy(xpath = "//input[contains(@class, 'subscribe')]")
-    WebElementFacade email;
+    public WebElementFacade email;
 
     @FindBy(xpath = "//footer//button[contains(text(),'Sign up')]")
-    WebElementFacade signupBtn;
+    public WebElementFacade signupBtn;
 
     @FindBy(xpath = "//div[contains(@class,'state')]")
-    WebElementFacade signUpstate;
+    public WebElementFacade signUpstate;
 
     @FindBy(xpath = "//span[contains(@class, 'login')]")
-    WebElementFacade signUpHeader;
+    public WebElementFacade signUpHeader;
 
     @FindBy(linkText = "Explore")
-    WebElementFacade explore;
+    public WebElementFacade explore;
 
     @FindBy(linkText = "Market")
-    WebElementFacade market;
+    public WebElementFacade market;
 
     @FindBy(linkText = "How It Works")
-    WebElementFacade howItWorks;
+    public WebElementFacade howItWorks;
+
+    @FindBy(xpath = "//span[text()='©2022']")
+    public WebElementFacade copyRightYear;
+
+    @FindBy(xpath = "//div[contains(@class,'right header')]//input[@type='search']")
+    public WebElementFacade search;
+
+    @FindBy(xpath = "//h2[@class='section__title'][text()='Frequently asked questions']")
+    public WebElementFacade exploreSectionTitle;
+
+    @FindBy(xpath = "//h2[@class='section__title']")
+    public WebElementFacade sectionTitle;
+
+
+    @FindBy(xpath = "//h2[@class='section__title'][text()='How it works']")
+    public WebElementFacade howItWorksSectionTitle;
+
+    @FindBy(xpath = "//h2[@class='section__title'][text()='Browse by category']")
+    public WebElementFacade marketTitleSectionTitle;
+
+    @FindBy(xpath = "//div[@class='footer-menu']/a[text()='Explore']")
+    public WebElementFacade footerExplore;
+
+    @FindBy(xpath = "//div[@class='footer-menu']/a[text()='Market']")
+    public WebElementFacade footerMarket;
+
+    @FindBy(xpath = "//div[@class='footer-menu']/a[text()='How It Works']")
+    public WebElementFacade footerHowItWorks;
+
+    @FindBy(xpath = "//div[@class='footer-menu']/a[text()='Terms Of services']")
+    public WebElementFacade terms;
+
+    @FindBy(xpath = "//div[@class='footer-menu']/a[text()='Privacy']")
+    public WebElementFacade privacy;
+
+
+    @FindBy(xpath = "//a[@class='social-list__item'][@aria-label='Telegram']")
+    public WebElementFacade telegram;
+
+    @FindBy(xpath = "//a[@class='social-list__item'][@aria-label='Twitter']")
+    public WebElementFacade twitter;
+
+    @FindBy(xpath = "//a[@class='social-list__item'][@aria-label='Instagram']")
+    public WebElementFacade insta;
+
+    @FindBy(xpath = "//a[@class='social-list__item'][@aria-label='Facebook']")
+    public WebElementFacade fb;
+
+    @FindBy(xpath = "//a[@class='social-list__item'][@aria-label='Discord']")
+    public WebElementFacade discord;
+
+    @FindBy(xpath = "//a[@class='social-list__item'][@aria-label='Linkedin']")
+    public WebElementFacade linkedin;
+
 
 
     public List getAllBrokenLinks() {
@@ -35,9 +92,8 @@ public class JungleHomePage extends BasePage {
     }
 
     public void enterEmail(String emailAddress) {
-        clickOn(email);
+//        clickOn(email);
         email.type(emailAddress);
-        clickOn(signupBtn);
     }
 
 
@@ -47,24 +103,36 @@ public class JungleHomePage extends BasePage {
     }
 
     public String getdefaultText() {
-        scrollToview(email);
         return email.getAttribute("placeholder");
     }
 
-    public void clicksignUp(){
+    public void clicksignUp() {
         clickOn(signUpHeader);
     }
 
-    public void clickExplore(){
+    public void clickExplore() {
         clickOn(explore);
     }
 
 
     public void clickOnMarket() {
-        clickOn(howItWorks);
+        clickOn(market);
     }
 
     public void clickOnHowitWorks() {
         clickOn(howItWorks);
+    }
+
+    public void clicksignUpBtnFooter() {
+        clickOn(signupBtn);
+    }
+
+    public boolean notPresentOfSuccessMsg(String text) {
+        System.out.println(waitFor(ExpectedConditions.textToBePresentInElement(signUpstate, text)));
+        return waitFor(ExpectedConditions.textToBePresentInElement(signUpstate, text));
+    }
+
+    public void scrollToBottomText() {
+
     }
 }

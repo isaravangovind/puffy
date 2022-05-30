@@ -1,6 +1,6 @@
 package org.puffy.stepdefination;
 
-import com.puffy.steps.BrokenLinks;
+import com.puffy.steps.HomeScreen;
 import com.puffy.steps.JungleHome;
 import com.puffy.steps.Resources;
 import io.cucumber.datatable.DataTable;
@@ -17,7 +17,7 @@ public class ResourcesSteps {
     Resources resourcesFAQs;
 
     @Steps
-    BrokenLinks brokenlinks;
+    HomeScreen brokenlinks;
 
     @Steps
     JungleHome junglehome;

@@ -68,4 +68,8 @@ public class BasePage extends PageObject {
 
     }
 
+    public void scrollToBottom() {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+    }
 }

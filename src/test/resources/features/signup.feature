@@ -13,9 +13,14 @@ Feature: SignUp Validation
       | Email          |
       | valid@test.com |
 
-  Scenario: Header SignUp check
 
+  Scenario: Header SignUp check
     When Click on sign up
     Then Navigates to Sign up page
 
-
+#  Scenario: Tool Tip check
+#    When Enter "test" and Click on Sign up
+#    When Enter "test" and Click on Sign up
+#    And Enter "test@" and Click on Sign up
+#    And Enter "test@1" and Click on Sign up
+#    And Enter "test@1." and Click on Sign up

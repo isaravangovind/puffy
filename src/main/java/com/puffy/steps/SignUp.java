@@ -4,13 +4,20 @@ import com.puffy.pages.JungleHomePage;
 import net.serenitybdd.core.Serenity;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class SignUp {
 
     JungleHomePage junglehomepage;
 
     public void enterEmail(String email) {
+        junglehomepage.scrollToview(junglehomepage.copyRightYear);
+        junglehomepage.email.clear();
         junglehomepage.enterEmail(email);
+    }
+
+    public void clickOnSignUpFooter() {
+        junglehomepage.clicksignUpBtnFooter();
     }
 
 
@@ -27,6 +34,7 @@ public class SignUp {
     }
 
     public void validatedefaultText(String defaultText) {
+        junglehomepage.scrollToview(junglehomepage.email);
         assertTrue("Email Sign up default value mismatch - Expected Sign up state is " + defaultText + " But displayed "
                 + junglehomepage.getdefaultText(), junglehomepage.getdefaultText().equals(defaultText));
 
@@ -40,7 +48,7 @@ public class SignUp {
 
     public void checkSignUpNavigation() {
         try {
-            if(junglehomepage.waitForAlert()) {
+            if (junglehomepage.waitForAlert()) {
                 // Enter Username and password
             } else {
                 // check for email and password field
@@ -51,5 +59,11 @@ public class SignUp {
             assertTrue(false);
         }
 
+    }
+
+    public void signUpFails(String successMsg) {
+        assertFalse("Sign up should not be successful with invalid email address " + successMsg + " But displayed "
+                        + junglehomepage.getSignupState(successMsg),
+                junglehomepage.notPresentOfSuccessMsg(successMsg));
     }
 }
