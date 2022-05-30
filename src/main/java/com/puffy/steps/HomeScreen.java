@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.Set;
 
 import static net.serenitybdd.core.Serenity.getDriver;
 import static org.junit.Assert.assertTrue;
@@ -149,7 +150,19 @@ public class HomeScreen {
         }
     }
 
+    public void switchWindow() {
+
+        Set<String> windowsHandles = getDriver().getWindowHandles();
+        System.out.println(windowsHandles.size());
+        for (String window : windowsHandles) {
+            System.out.println(window);
+            getDriver().switchTo().window(window);
+        }
+
+    }
+
     public void checkSocialMediaInfo(String link, String url, String title, SoftAssertions soft) {
+        String mainWindow = getDriver().getWindowHandle();
         if (link.equalsIgnoreCase("twitter")) {
             junglehomepage.scrollToview(junglehomepage.twitter);
             try {
@@ -158,9 +171,7 @@ public class HomeScreen {
                 e.printStackTrace();
             }
             junglehomepage.clickOn(junglehomepage.twitter);
-//            getDriver().switchTo().newWindow().getCurrentUrl();
-            soft.assertThat(getDriver().getTitle()).isEqualTo(title);
-            soft.assertThat(getDriver().getCurrentUrl()).isEqualTo(url);
+            socialmediaHandles(link, url, title, mainWindow, soft);
         }
 
         if (link.equalsIgnoreCase("facebook")) {
@@ -171,8 +182,7 @@ public class HomeScreen {
                 e.printStackTrace();
             }
             junglehomepage.clickOn(junglehomepage.fb);
-            soft.assertThat(getDriver().getTitle()).isEqualTo(title);
-            soft.assertThat(getDriver().getCurrentUrl()).isEqualTo(url);
+            socialmediaHandles(link, url, title, mainWindow, soft);
         }
 
         if (link.equalsIgnoreCase("instagram")) {
@@ -183,8 +193,7 @@ public class HomeScreen {
                 e.printStackTrace();
             }
             junglehomepage.clickOn(junglehomepage.insta);
-            soft.assertThat(getDriver().getTitle()).isEqualTo(title);
-            soft.assertThat(getDriver().getCurrentUrl()).isEqualTo(url);
+            socialmediaHandles(link, url, title, mainWindow, soft);
         }
 
         if (link.equalsIgnoreCase("discord")) {
@@ -195,11 +204,10 @@ public class HomeScreen {
                 e.printStackTrace();
             }
             junglehomepage.clickOn(junglehomepage.discord);
-            soft.assertThat(getDriver().getTitle()).isEqualTo(title);
-            soft.assertThat(getDriver().getCurrentUrl()).isEqualTo(url);
+            socialmediaHandles(link, url, title, mainWindow, soft);
         }
 
-        if (link.equalsIgnoreCase("Telegram")) {
+        if (link.equalsIgnoreCase("telegram")) {
             junglehomepage.scrollToview(junglehomepage.telegram);
             try {
                 Thread.sleep(1000);
@@ -207,8 +215,7 @@ public class HomeScreen {
                 e.printStackTrace();
             }
             junglehomepage.clickOn(junglehomepage.telegram);
-            soft.assertThat(getDriver().getTitle()).isEqualTo(title);
-            soft.assertThat(getDriver().getCurrentUrl()).isEqualTo(url);
+            socialmediaHandles(link, url, title, mainWindow, soft);
         }
 
         if (link.equalsIgnoreCase("Linkedin")) {
@@ -219,9 +226,29 @@ public class HomeScreen {
                 e.printStackTrace();
             }
             junglehomepage.clickOn(junglehomepage.linkedin);
-            soft.assertThat(getDriver().getTitle()).isEqualTo(title);
-            soft.assertThat(getDriver().getCurrentUrl()).isEqualTo(url);
+            socialmediaHandles(link, url, title, mainWindow, soft);
         }
 
+    }
+
+    private void socialmediaHandles(String link, String url, String title, String mainWindow, SoftAssertions soft) {
+        System.out.println(getDriver().getWindowHandle());
+        switchWindow();
+        System.out.println(getDriver().getWindowHandle());
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(getDriver().getTitle());
+        soft.assertThat(getDriver().getTitle().replaceAll("\\s", "")).contains(title);
+        soft.assertThat(getDriver().getCurrentUrl()).contains(url);
+        Serenity.recordReportData().withTitle(link + " details")
+                .andContents("URL : " + getDriver().getCurrentUrl() + "\n"
+                        + "Page Title Contains expected : " + getDriver().getTitle());
+        getDriver().close();
+        getDriver().switchTo().window(mainWindow);
+        System.out.println(getDriver().getCurrentUrl());
     }
 }

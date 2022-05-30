@@ -96,12 +96,12 @@ public class HomeScreenSteps {
         // formValidationResults = new ArrayList<Boolean>();
 
         for (Map<String, String> mediaInfo : data) {
-            String link = mediaInfo.get("Link");
+            String socialMedia = mediaInfo.get("Social Media");;
             String url = mediaInfo.get("Url");
-            String title = mediaInfo.get("Title");
-            homescreen.checkSocialMediaInfo(link, url, title, soft);
+            String title = mediaInfo.get("Title").replaceAll("\\s", "");
+            homescreen.checkSocialMediaInfo(socialMedia, url, title, soft);
         }
-
+        soft.assertAll();
     }
 }
 
