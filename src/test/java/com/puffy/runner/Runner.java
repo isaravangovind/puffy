@@ -1,4 +1,4 @@
-package org.puffy.runner;
+package com.puffy.runner;
 
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = "org.puffy.stepdefination"
+        glue = "com.puffy.stepdefination"
 )
 public class Runner {
 }

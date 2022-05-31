@@ -1,4 +1,4 @@
-package org.puffy.stepdefination;
+package com.puffy.stepdefination;
 
 import com.puffy.steps.JungleHome;
 import net.thucydides.core.annotations.Steps;
